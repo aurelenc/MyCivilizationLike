@@ -10,11 +10,12 @@
 void display_civ(civlike_t *civ)
 {
     for (int i = 0; i < MAX_TILES; i++) {
-        if (civ->graph->tiles[i].selected)
+        if (civ->graph->tiles[i]->selected)
             sfConvexShape_setFillColor(civ->graph->hex, sfGreen);
         else
             sfConvexShape_setFillColor(civ->graph->hex, sfWhite);
-        sfConvexShape_setPosition(civ->graph->hex, civ->graph->tiles[i].pos);
+        sfConvexShape_setTexture(civ->graph->hex, civ->graph->tile_base_textures[civ->graph->tiles[i]->type], sfTrue);
+        sfConvexShape_setPosition(civ->graph->hex, civ->graph->tiles[i]->pos);
         sfRenderWindow_drawConvexShape(civ->graph->window, civ->graph->hex, NULL);
     }
 }

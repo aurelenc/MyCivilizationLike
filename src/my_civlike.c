@@ -18,6 +18,9 @@ int run_game(civlike_t *civ)
         // rpg->time = sfClock_restart(rpg->main_clock);
         while (sfRenderWindow_pollEvent(civ->graph->window, &event))
             analyse_events(civ, event);
+        if (sfTime_asMilliseconds(sfClock_getElapsedTime(civ->graph->view_clock)) >= 20)
+            check_move_camera(civ);
+        sfRenderWindow_setView(civ->graph->window, civ->graph->view);
         sfRenderWindow_clear(civ->graph->window, sfBlack);
         display_civ(civ);
         sfRenderWindow_display(civ->graph->window);

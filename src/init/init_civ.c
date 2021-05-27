@@ -8,14 +8,21 @@
 #include "my_civlike.h"
 #include <stdlib.h>
 
-void init_tiles(graph_t *graph)
+int init_tiles(graph_t *graph)
 {
     sfVector2f pos = {0, 0};
     bool step = false;
 
+    graph->tiles = calloc(sizeof(tile_t *), MAX_TILES + 1);
+    if (!graph->tiles)
+        return (-1);
     for (int i = 0; i < MAX_TILES; i++) {
-        graph->tiles[i].selected = false;
-        graph->tiles[i].pos = pos;
+        graph->tiles[i] = calloc(sizeof(tile_t), 1);
+        if (!graph->tiles[i])
+            return (-1);
+        graph->tiles[i]->type = PLAINS;
+        graph->tiles[i]->selected = false;
+        graph->tiles[i]->pos = pos;
         if (pos.x <= 1920) {
             pos.x += 181;
         } else {
@@ -28,6 +35,7 @@ void init_tiles(graph_t *graph)
                 step = false;
         }
     }
+    return (0);
 }
 
 int init_graph(civlike_t *civ)
@@ -76,12 +84,51 @@ int create_graph(civlike_t *civ)
     return (0);
 }
 
+int init_textures(civlike_t *civ)
+{
+    civ->graph->tile_base_textures = calloc(sizeof(sfTexture *), TILE_TYPE_COUNT + 1);
+    civ->graph->tile_base_textures[PLAINS] = sfTexture_createFromFile("assets/textures/tiles/plains.jpg", NULL);
+    civ->graph->tile_base_textures[GRASSLAND] = sfTexture_createFromFile("assets/textures/tiles/grassland.jpg", NULL);
+    civ->graph->tile_base_textures[DESERT] = sfTexture_createFromFile("assets/textures/tiles/desert.jpg", NULL);
+    civ->graph->tile_base_textures[TUNDRA] = sfTexture_createFromFile("assets/textures/tiles/tundra.jpg", NULL);
+    civ->graph->tile_base_textures[SNOW] = sfTexture_createFromFile("assets/textures/tiles/snow.jpg", NULL);
+    civ->graph->tile_base_textures[COAST] = sfTexture_createFromFile("assets/textures/tiles/coast.jpg", NULL);
+    civ->graph->tile_base_textures[LAKE] = sfTexture_createFromFile("assets/textures/tiles/coast.jpg", NULL);
+    civ->graph->tile_base_textures[OCEAN] = sfTexture_createFromFile("assets/textures/tiles/ocean.jpg", NULL);
+    civ->graph->tile_base_textures[MOUNTAINS] = sfTexture_createFromFile("assets/textures/tiles/mountains.jpg", NULL);
+    for (int i = 0; i < TILE_TYPE_COUNT; i++) {
+        if (!civ->graph->tile_base_textures[i])
+            return (-1);
+    }
+    civ->selected_tile = 0;
+    return (0);
+}
+
+int init_view(civlike_t *civ)
+{
+    civ->graph->view = sfView_create();
+    if (!civ->graph->view)
+        return (-1);
+    civ->graph->view_clock = sfClock_create();
+    if (!civ->graph->view_clock)
+        return (-1);
+    sfView_setSize(civ->graph->view, (sfVector2f){1920, 1080});
+    sfView_setCenter(civ->graph->view, (sfVector2f){1920 / 2, 1080 / 2});
+    sfRenderWindow_setView(civ->graph->window, civ->graph->view);
+    return (0);
+}
+
 int init_civ(civlike_t *civ)
 {
     if (create_graph(civ) < 0)
         return (-1);
     if (init_graph(civ) < 0)
         return (-1);
-    init_tiles(civ->graph);
+    if (init_textures(civ) < 0)
+        return (-1);
+    if (init_tiles(civ->graph) < 0)
+        return (-1);
+    if (init_view(civ) < 0)
+        return (-1);
     return (0);
 }

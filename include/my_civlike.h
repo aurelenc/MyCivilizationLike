@@ -11,17 +11,18 @@
 #include <SFML/Graphics.h>
 #include <stdbool.h>
 
-#define MAX_TILES 512
+#define MAX_TILES 516
 
 typedef enum tile_type_e {
     PLAINS,
-    GRASSLANDS,
-    FOREST,
+    GRASSLAND,
     DESERT,
-    MOUNTAINS,
-    OCEAN,
-    WATER,
+    TUNDRA,
     SNOW,
+    COAST,
+    LAKE,
+    OCEAN,
+    MOUNTAINS,
     TILE_TYPE_COUNT
 } tile_type_t;
 
@@ -40,12 +41,16 @@ typedef struct graph_s {
     sfRenderWindow *window;
     sfConvexShape *hex;
     sfVector2f *hex_vectors;
-    tile_t *tiles;
+    tile_t **tiles;
     sfVector2f *positions;
+    sfTexture **tile_base_textures;
+    sfView *view;
+    sfClock *view_clock;
 } graph_t;
 
 typedef struct civlike_s {
     graph_t *graph;
+    int selected_tile;
 } civlike_t;
 
 #endif /* !MY_CIVLIKE_H_ */
