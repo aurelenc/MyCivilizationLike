@@ -10,6 +10,7 @@ MAIN	=	src/main.c
 SRC	=	src/my_civlike.c	\
 		src/display/display_civ.c	\
 		src/display/display_tiles.c	\
+		src/events/camera.c	\
 		src/events/events_civ.c	\
 		src/init/init_civ.c	\
 

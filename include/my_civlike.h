@@ -46,11 +46,20 @@ typedef struct graph_s {
     sfTexture **tile_base_textures;
     sfView *view;
     sfClock *view_clock;
+    sfVector2u window_size;
 } graph_t;
 
 typedef struct civlike_s {
     graph_t *graph;
     int selected_tile;
 } civlike_t;
+
+
+// Prototypes
+int my_civlike(void);
+void analyse_events(civlike_t *civ, sfEvent event);
+void display_civ(civlike_t *civ);
+int init_civ(civlike_t *civ);
+void check_move_camera(civlike_t *civ);
 
 #endif /* !MY_CIVLIKE_H_ */

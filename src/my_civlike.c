@@ -15,7 +15,6 @@ int run_game(civlike_t *civ)
     sfEvent event;
 
     while (sfRenderWindow_isOpen(civ->graph->window)) {
-        // rpg->time = sfClock_restart(rpg->main_clock);
         while (sfRenderWindow_pollEvent(civ->graph->window, &event))
             analyse_events(civ, event);
         if (sfTime_asMilliseconds(sfClock_getElapsedTime(civ->graph->view_clock)) >= 20)
