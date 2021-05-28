@@ -12,6 +12,7 @@ int init_tiles(graph_t *graph)
 {
     sfVector2f pos = {0, 0};
     bool step = false;
+    int x = 0;
 
     graph->tiles = calloc(sizeof(tile_t *), MAX_TILES + 1);
     if (!graph->tiles)
@@ -23,10 +24,12 @@ int init_tiles(graph_t *graph)
         graph->tiles[i]->type = PLAINS;
         graph->tiles[i]->selected = false;
         graph->tiles[i]->pos = pos;
-        if (pos.x <= 1920) {
+        if (x <= MAP_SIZE_X) {
             pos.x += 181;
+            x += 1;
         } else {
             pos.x = 0;
+            x = 0;
             pos.y += 52;
             if (step == false) {
                 step = true;
@@ -128,6 +131,7 @@ int init_civ(civlike_t *civ)
         return (-1);
     if (init_tiles(civ->graph) < 0)
         return (-1);
+    load_map(civ);
     if (init_view(civ) < 0)
         return (-1);
     return (0);

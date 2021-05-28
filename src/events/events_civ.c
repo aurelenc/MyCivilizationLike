@@ -67,6 +67,7 @@ void check_keyboard_inputs(civlike_t *civ, sfEvent event)
         civ->graph->tiles[civ->selected_tile]->type = 7;
     else if (event.key.code == sfKeyNumpad8)
         civ->graph->tiles[civ->selected_tile]->type = 8;
+    save_map(civ);
 }
 
 void check_mouse_events(civlike_t *civ, sfEvent event, sfVector2f mouse_rel)

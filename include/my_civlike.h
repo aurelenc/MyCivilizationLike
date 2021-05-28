@@ -11,7 +11,8 @@
 #include <SFML/Graphics.h>
 #include <stdbool.h>
 
-#define MAX_TILES 516
+#define MAP_SIZE_X 20
+#define MAX_TILES 770
 
 typedef enum tile_type_e {
     PLAINS,
@@ -61,5 +62,7 @@ void analyse_events(civlike_t *civ, sfEvent event);
 void display_civ(civlike_t *civ);
 int init_civ(civlike_t *civ);
 void check_move_camera(civlike_t *civ);
+int load_map(civlike_t *civ);
+int save_map(civlike_t *civ);
 
 #endif /* !MY_CIVLIKE_H_ */

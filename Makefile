@@ -13,6 +13,7 @@ SRC	=	src/my_civlike.c	\
 		src/events/camera.c	\
 		src/events/events_civ.c	\
 		src/init/init_civ.c	\
+		src/world/load_save.c \
 
 OBJ	=	$(MAIN:.c=.o) $(SRC:.c=.o)
 
