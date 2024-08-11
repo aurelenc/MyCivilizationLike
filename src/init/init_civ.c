@@ -90,15 +90,15 @@ int create_graph(civlike_t *civ)
 int init_textures(civlike_t *civ)
 {
     civ->graph->tile_base_textures = calloc(sizeof(sfTexture *), TILE_TYPE_COUNT + 1);
-    civ->graph->tile_base_textures[PLAINS] = sfTexture_createFromFile("assets/textures/tiles/plains.jpg", NULL);
-    civ->graph->tile_base_textures[GRASSLAND] = sfTexture_createFromFile("assets/textures/tiles/grassland.jpg", NULL);
-    civ->graph->tile_base_textures[DESERT] = sfTexture_createFromFile("assets/textures/tiles/desert.jpg", NULL);
-    civ->graph->tile_base_textures[TUNDRA] = sfTexture_createFromFile("assets/textures/tiles/tundra.jpg", NULL);
-    civ->graph->tile_base_textures[SNOW] = sfTexture_createFromFile("assets/textures/tiles/snow.jpg", NULL);
-    civ->graph->tile_base_textures[COAST] = sfTexture_createFromFile("assets/textures/tiles/coast.jpg", NULL);
-    civ->graph->tile_base_textures[LAKE] = sfTexture_createFromFile("assets/textures/tiles/coast.jpg", NULL);
-    civ->graph->tile_base_textures[OCEAN] = sfTexture_createFromFile("assets/textures/tiles/ocean.jpg", NULL);
-    civ->graph->tile_base_textures[MOUNTAINS] = sfTexture_createFromFile("assets/textures/tiles/mountains.jpg", NULL);
+    civ->graph->tile_base_textures[PLAINS] = sfTexture_createFromFile("assets/textures/tiles/plains.png", NULL);
+    civ->graph->tile_base_textures[GRASSLAND] = sfTexture_createFromFile("assets/textures/tiles/grassland.png", NULL);
+    civ->graph->tile_base_textures[DESERT] = sfTexture_createFromFile("assets/textures/tiles/desert.png", NULL);
+    civ->graph->tile_base_textures[TUNDRA] = sfTexture_createFromFile("assets/textures/tiles/tundra.png", NULL);
+    civ->graph->tile_base_textures[SNOW] = sfTexture_createFromFile("assets/textures/tiles/snow.png", NULL);
+    civ->graph->tile_base_textures[COAST] = sfTexture_createFromFile("assets/textures/tiles/coast.png", NULL);
+    civ->graph->tile_base_textures[LAKE] = sfTexture_createFromFile("assets/textures/tiles/coast.png", NULL);
+    civ->graph->tile_base_textures[OCEAN] = sfTexture_createFromFile("assets/textures/tiles/ocean.png", NULL);
+    civ->graph->tile_base_textures[MOUNTAINS] = sfTexture_createFromFile("assets/textures/tiles/mountains.png", NULL);
     for (int i = 0; i < TILE_TYPE_COUNT; i++) {
         if (!civ->graph->tile_base_textures[i])
             return (-1);
