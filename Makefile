@@ -12,6 +12,8 @@ SRC	=	src/my_civlike.c	\
 		src/display/display_tiles.c	\
 		src/events/camera.c	\
 		src/events/events_civ.c	\
+		src/events/events_level.c	\
+		src/events/events_ui.c	\
 		src/init/init_civ.c	\
 		src/world/load_save.c \
 

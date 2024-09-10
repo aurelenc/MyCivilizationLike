@@ -10,11 +10,13 @@
 
 #include <SFML/Graphics.h>
 #include <stdbool.h>
+#include "my_ui.h"
 
 #define MAP_SIZE_X 20
 #define MAX_TILES 770
 
-typedef enum tile_type_e {
+typedef enum tile_type_e
+{
     PLAINS,
     GRASSLAND,
     DESERT,
@@ -27,7 +29,8 @@ typedef enum tile_type_e {
     TILE_TYPE_COUNT
 } tile_type_t;
 
-typedef struct tile_s {
+typedef struct tile_s
+{
     tile_type_t type;
     bool is_building;
     bool is_civil_unit;
@@ -38,7 +41,8 @@ typedef struct tile_s {
     sfVector2f *positions;
 } tile_t;
 
-typedef struct graph_s {
+typedef struct graph_s
+{
     sfRenderWindow *window;
     sfConvexShape *hex;
     sfVector2f *hex_vectors;
@@ -50,11 +54,11 @@ typedef struct graph_s {
     sfVector2u window_size;
 } graph_t;
 
-typedef struct civlike_s {
+typedef struct civlike_s
+{
     graph_t *graph;
     int selected_tile;
 } civlike_t;
-
 
 // Prototypes
 int my_civlike(void);

@@ -6,6 +6,7 @@
 */
 
 #include "my_civlike.h"
+#include "my_ui.h"
 #include <math.h>
 
 int on_right(sfVector2f pos1, sfVector2f pos2, sfVector2f point)
@@ -95,18 +96,16 @@ void check_mouse_events(civlike_t *civ, sfEvent event, sfVector2f mouse_rel)
     civ->graph->window_size = sfRenderWindow_getSize(civ->graph->window);
     if (event.type == sfEvtMouseButtonPressed)
     {
-        for (int i = 0; i < MAX_TILES; i++)
+        if (handle_ui_click(civ, mouse_rel) == UI_EVENT_BLOCK)
         {
-            if (in_tile(civ->graph->tiles[i], civ->graph->hex_vectors, mouse_rel, civ->graph->hex))
-            {
-                civ->graph->tiles[i]->selected = true;
-                civ->selected_tile = i;
-            }
-            else
-                civ->graph->tiles[i]->selected = false;
+            return;
+        }
+        else if (handle_level_clicks(civ, event, mouse_rel) == true)
+        {
+            return;
         }
     }
-    if (event.type == sfEvtMouseWheelScrolled)
+    else if (event.type == sfEvtMouseWheelScrolled)
     {
         if (event.mouseWheelScroll.delta > 0 && view_size.y > (civ->graph->window_size.y * pow(0.8, 4)))
             sfView_zoom(civ->graph->view, 0.8);
